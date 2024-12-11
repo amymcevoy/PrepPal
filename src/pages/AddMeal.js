@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function AddMeal() {
 
@@ -12,6 +13,7 @@ function AddMeal() {
   });
 
   const [submitted, setSubmitted] = useState(false); //track if meal is submitted or not
+  const navigate = useNavigate();
 
   // deal with changes to form 
   const handleChange = (e) => {
@@ -37,7 +39,7 @@ function AddMeal() {
         return; 
       }
 
-       //saves meal in local storage
+       //saves meal in local storage ( used geeksforgeeks for help with all local storage)
        const storedMeals = JSON.parse(localStorage.getItem('meals')) || [];
        storedMeals.push(meal);
        localStorage.setItem('meals', JSON.stringify(storedMeals));
@@ -59,11 +61,17 @@ function AddMeal() {
       }, 3000);
   };
 
+    // Back button function
+    const handleBack = () => {
+      navigate(-1);  // Navigate back to the previous page
+    };
+
   return (
     <div  className="add-meal-container">
 
       {/* Form to add new meal */}
       <h1>Add a New Meal</h1>
+      <button onClick={handleBack}>Back</button>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name</label>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
 function MealList() {
   const [meals, setMeals] = useState([]);
@@ -11,6 +12,7 @@ function MealList() {
     setMeals(storedMeals);
 }, []);
     
+const navigate = useNavigate();
 
     //delete a meal
     const handleDelete = (index) => {
@@ -44,9 +46,15 @@ function MealList() {
     setEditIndex(null); //exit editing
     };
 
+    // Back button function
+    const handleBack = () => {
+    navigate(-1);  // Navigate back to the previous page
+    };
+
     return (
         <div className="meal-list-container">
           <h1>Saved Meals</h1>
+          <button onClick={handleBack}>Back</button>
           {meals.length === 0 ? (
             <p>No meals added yet. Please add a meal.</p>
           ) : (
