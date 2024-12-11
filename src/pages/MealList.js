@@ -7,7 +7,16 @@ function MealList() {
     // Retrieve saved meals from localStorage
     const storedMeals = JSON.parse(localStorage.getItem('meals')) || [];
     setMeals(storedMeals);
-  }, []);
+}, []);
+    
+
+    //delete a meal
+    const handleDelete = (index) => {
+        const updatedMeals = [...meals];
+        updatedMeals.splice(index, 1); // Remove meal at specified index
+        setMeals(updatedMeals);
+        localStorage.setItem('meals', JSON.stringify(updatedMeals)); // Update localStorage
+  };
 
   return (
     <div className="meal-list-container">
@@ -22,6 +31,7 @@ function MealList() {
               <p>{meal.ingredients}</p>
               <p>Calories: {meal.calories}</p>
               <p>{meal.instructions}</p>
+              <button onClick={() => handleDelete(index)}>Delete</button> 
             </li>
           ))}
         </ul>
@@ -30,5 +40,5 @@ function MealList() {
   );
 }
 
-export default MealList;  // This should be the default export
+export default MealList; 
 
