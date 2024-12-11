@@ -8,7 +8,10 @@ function AddMeal() {
     ingredients: '',
     calories: '',
     instructions: '',
+
   });
+
+  const [submitted, setSubmitted] = useState(false); //track if meal is submitted or not
 
   // deal with changes to form 
   const handleChange = (e) => {
@@ -22,11 +25,33 @@ function AddMeal() {
   // form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(meal);
+
+       //saves meal in local storage
+       const storedMeals = JSON.parse(localStorage.getItem('meals')) || [];
+       storedMeals.push(meal);
+       localStorage.setItem('meals', JSON.stringify(storedMeals));
+
+      // reset form and show success message
+      setMeal({
+        name: '',
+        ingredients: '',
+        calories: '',
+        instructions: '',
+
+      });
+
+      setSubmitted(true);
+
+      // reset success message
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 3000);
   };
 
   return (
-    <div>
+    <div  className="add-meal-container">
+      
+      {/* Form to add new meal */}
       <h1>Add a New Meal</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -70,6 +95,14 @@ function AddMeal() {
         </div>
         <button type="submit">Submit Meal</button>
       </form>
+
+    {/* shows success message after form submission */}
+      {submitted && (
+        <p style={{ color: 'green', textAlign: 'center', marginTop: '10px' }}>
+          Meal added successfully!
+        </p>
+      
+      )}
     </div>
   );
 }
