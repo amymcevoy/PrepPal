@@ -26,6 +26,17 @@ function AddMeal() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+      // form validation
+      if (!meal.name || !meal.ingredients || !meal.calories || !meal.instructions) {
+        alert('Please fill in all fields');
+        return; // Stop if fields are empty
+      }
+
+      if (meal.calories <= 0) {
+        alert('Calories must be a positive number');
+        return; 
+      }
+
        //saves meal in local storage
        const storedMeals = JSON.parse(localStorage.getItem('meals')) || [];
        storedMeals.push(meal);
@@ -50,7 +61,7 @@ function AddMeal() {
 
   return (
     <div  className="add-meal-container">
-      
+
       {/* Form to add new meal */}
       <h1>Add a New Meal</h1>
       <form onSubmit={handleSubmit}>
