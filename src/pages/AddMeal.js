@@ -71,7 +71,7 @@ function AddMeal() {
 
       {/* Form to add new meal */}
       <h1>Add a New Meal</h1>
-      <button onClick={handleBack}>Back</button>
+      <button className="back-btn" onClick={handleBack}>Back</button>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name</label>

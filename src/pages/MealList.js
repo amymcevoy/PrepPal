@@ -54,7 +54,7 @@ const navigate = useNavigate();
     return (
         <div className="meal-list-container">
           <h1>Saved Meals</h1>
-          <button onClick={handleBack}>Back</button>
+          <button className="back-btn" onClick={handleBack}>Back</button>
           {meals.length === 0 ? (
             <p>No meals added yet. Please add a meal.</p>
           ) : (

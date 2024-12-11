@@ -1,54 +1,66 @@
-.App {
-  text-align: center;
-}
+/* Styling done using geeksforgeeks & ChatGPT*/
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #2b2b36;
+  color : #ffffff
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-/* Styling done using geeksforgeeks */
 
 /* Container for the Add Meal Page */
-.add-meal-container {
+.add-meal-container, .meal-list-container {
   width: 90%;
-  max-width: 500px;
+  max-width: 600px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #484861;
+  color : #ffffff;
   border-radius: 8px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Title Styling */
-.add-meal-container h1 {
+.add-meal-container h1 , .meal-list-container h1 {
   text-align: center;
   font-size: 1.5rem;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 20px;
+}
+
+/* Back Button Styling (Positioned top-left) */
+button.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 14px;
+  padding: 6px 12px;
+  background-color: #670e7e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.back-btn:hover {
+  background-color: #670e7e;
 }
 
 /* Form Styling */
 form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  color: white;
+  gap: 16px;
 }
 
 /* Label Styling */
 form label {
   font-size: 1rem;
-  color: #555;
+  color: white;
 }
 
 /* Input Field Styling */
@@ -63,7 +75,7 @@ form input, form textarea {
 /* Submit Button Styling */
 form button {
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #670e7e;
   color: white;
   font-size: 1rem;
   border: none;
@@ -72,7 +84,7 @@ form button {
 }
 
 form button:hover {
-  background-color: #45a049;
+  background-color: #670e7e;
 }
 
 
@@ -102,7 +114,7 @@ textarea {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #670e7e;
   color: white;
   padding: 10px;
   border: none;
@@ -113,7 +125,7 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #670e7e;
 }
 
 div.edit-form {
