@@ -9,6 +9,10 @@ function Home() {
       <Link to="/add-meal">
         <button>Add a New Meal</button> 
       </Link>
+      <br />
+      <Link to="/meal-list">
+        <button>View Saved Meals</button>
+      </Link>
 
     </div>
   );
