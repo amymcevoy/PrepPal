@@ -71,6 +71,7 @@ function AddMeal() {
         <div>
           <label>Name</label>
           <input
+            placeholder="eg. Pizza"
             type="text"
             name="name"
             value={meal.name}
@@ -81,6 +82,7 @@ function AddMeal() {
         <div>
           <label>Ingredients</label>
           <input
+            placeholer="eg. Cheese ,Dough Sauce"
             type="text"
             name="ingredients"
             value={meal.ingredients}
@@ -91,6 +93,7 @@ function AddMeal() {
         <div>
           <label>Calories</label>
           <input
+            placeholder="eg. 456"
             type="number"
             name="calories"
             value={meal.calories}
@@ -101,6 +104,7 @@ function AddMeal() {
         <div>
           <label>Instructions</label>
           <textarea
+            placeholer="eg. Roll out dough, spread sauce etc"
             name="instructions"
             value={meal.instructions}
             onChange={handleChange}
@@ -108,11 +112,12 @@ function AddMeal() {
           />
         </div>
         <button type="submit">Submit Meal</button>
-      </form>
-      
-      <Link to="/meal-list">
-          <button className="secondary-button">Meal List</button> 
+
+        <Link to="/meal-list">
+          <button>Meal List</button> 
       </Link>
+
+      </form>
 
       {submitted && (
         <p style={{ color: 'white', textAlign: 'center', marginTop: '10px' }}>
