@@ -1,147 +1,198 @@
-/* Styling done using geeksforgeeks & ChatGPT*/
-
+/* Global body styling */
 body {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;     /* Center vertically */
-  height: 100vh;
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #2b2b36;
-  color : #ffffff
-}
-
-/* Container for the Add Meal Page */
-.add-meal-container, .meal-list-container {
-  width: 90%;
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #484861;
-  color : #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Title Styling */
-.add-meal-container h1 , .meal-list-container h1 {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  font-size: 1.5rem;
-  color: #ffffff;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #D97706; /* Orange theme */
+  color: #1E3A8A; /* Navy text */
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #1E3A8A; /* Navy color for headings */
+}
+
+/* Container styling for form and buttons */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 400px; /* Center the form and limit its width */
+  background-color: #ffffff; /* White background for form */
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  gap: 20px; /* Add consistent spacing between fields and buttons */
+}
+
+/* Form styling */
+form {
+  width: 80%; /* Full width for form */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between input fields */
+}
+
+.homebutton{
+  width: 100%; /* Full width for consistency with the submit button */
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  background-color: #1E3A8A; /* Navy blue for secondary button */
+  color: white;
   margin-bottom: 20px;
 }
 
-/* Back Button Styling (Positioned top-left) */
+.homebutton:hover {
+  background-color: #0D9488; /* Teal hover effect for secondary button */
+}
+
+/* Input and textarea styling */
+form input,
+form textarea {
+  width: 100%; /* Full width inputs */
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #1E3A8A; /* Navy border */
+  border-radius: 8px; /* Rounded corners */
+  color: #1E3A8A; /* Navy text for inputs */
+  background-color: #F3F4F6; /* Light grey for inputs */
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #0D9488; /* Teal for focus state */
+}
+
+/* Submit Button Styling (inside forms) */
+form button {
+  background-color: #1E3A8A; /* Navy blue for submit button */
+  color: white;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%; /* Full width buttons */
+}
+
+form button:hover {
+  background-color: #0D9488; /* Teal hover effect for submit button */
+}
+
+/* Secondary button styling (Meal List button) */
+.secondary-button {
+  width: 100%; /* Full width for consistency with the submit button */
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  background-color: #1E3A8A; /* Navy blue for secondary button */
+  color: white;
+}
+
+.secondary-button:hover {
+  background-color: #0D9488; /* Teal hover effect for secondary button */
+}
+
+/* List Styling */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* Meal Item Cards */
+li {
+  background-color: #ffffff; /* White background for cards */
+  color: #1E3A8A; /* Navy text for meal details */
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px; /* Rounded corners for card-like appearance */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center; /* Center meal details inside card */
+}
+
+/* Meal Details */
+.meal-details strong {
+  font-size: 1.2rem; /* Slightly larger font for meal name */
+  display: block;
+  margin-bottom: 10px;
+}
+
+.meal-details p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+/* Editable form for meals */
+.edit-form input,
+.edit-form textarea {
+  width: 90%; /* Responsive width */
+  max-width: 400px; /* Limit maximum width */
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.edit-form textarea {
+  height: 80px; /* Taller for text area */
+}
+
+/* Action Buttons (Edit, Delete) */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Space between buttons */
+}
+
+/* Back button styling */
 button.back-btn {
   position: absolute;
   top: 20px;
   left: 20px;
-  font-size: 14px;
-  padding: 6px 12px;
-  background-color: #670e7e;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button.back-btn:hover {
-  background-color: #670e7e;
-}
-
-/* Form Styling */
-form {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  gap: 16px;
-}
-
-/* Label Styling */
-form label {
-  font-size: 1rem;
-  color: white;
-}
-
-/* Input Field Styling */
-form input, form textarea {
-  padding: 8px;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
-
-/* Submit Button Styling */
-form button {
-  padding: 10px;
-  background-color: #670e7e;
+  background-color: #1E3A8A; /* Same as other buttons for consistency */
   color: white;
   font-size: 1rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-form button:hover {
-  background-color: #670e7e;
-}
-
-
-.meal-list-container {
-  padding: 20px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ddd;
+  padding: 10px 15px;
   border-radius: 8px;
 }
 
-input,
-textarea {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+button.back-btn:hover {
+  background-color: #0D9488; /* Teal hover for back button */
 }
 
-button {
-  background-color: #670e7e;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  ul {
+    width: 90%;
+  }
+
+  li {
+    padding: 15px;
+  }
+
+  button {
+    width: 100%; /* Full-width buttons on small screens */
+  }
 }
-
-button:hover {
-  background-color: #670e7e;
-}
-
-div.edit-form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-input[type="number"] {
-  width: 100px;
-}
-
-textarea {
-  height: 100px;
-}
-
-
-
-

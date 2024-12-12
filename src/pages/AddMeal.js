@@ -63,8 +63,7 @@ function AddMeal() {
   };
 
   return (
-    <div  className="add-meal-container">
-
+    <div className="form-container">
       {/* Form to add new meal */}
       <h1>Add a New Meal</h1>
       <button className="back-btn" onClick={handleBack}>Back</button>
@@ -112,7 +111,7 @@ function AddMeal() {
       </form>
       
       <Link to="/meal-list">
-          <button>Meal List</button> 
+          <button className="secondary-button">Meal List</button> 
       </Link>
 
       {submitted && (

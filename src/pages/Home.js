@@ -7,11 +7,11 @@ function Home() {
       <h1>Welcome to PrepPal!</h1>
 
       <Link to="/add-meal">
-        <button>Add a New Meal</button> 
+        <button className='homebutton'>Add a New Meal</button> 
       </Link>
       <br />
       <Link to="/meal-list">
-        <button>View Saved Meals</button>
+        <button className='homebutton'>View Saved Meals</button>
       </Link>
 
     </div>
