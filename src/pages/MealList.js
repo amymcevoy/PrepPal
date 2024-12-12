@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function MealList() {
   const [meals, setMeals] = useState([]);
   const [editIndex, setEditIndex] = useState(null); 
   const [editMeal, setEditMeal] = useState({});
+  const [filterCategory, setFilterCategory] = useState("");
 
   const navigate = useNavigate();
 
@@ -74,9 +76,14 @@ function MealList() {
     };
 
     return (
-        <div className="meal-list-container">
+        <div className="edit-form-container">
           <h1>Saved Meals</h1>
           <button className="back-btn" onClick={handleBack}>Back</button>
+
+                <Link to="/add-meal">
+                  <button className='addbutton'>Add a New Meal</button> 
+                </Link>
+
           {meals.length === 0 ? (
             <p>No meals added yet. Please add a meal.</p>
           ) : (
@@ -86,6 +93,22 @@ function MealList() {
                   {editIndex === index ? (
                     <div>
                       {/* Editable fields */}
+                      <label>Category</label>
+                       <select
+                        name="category"
+                        value={editMeal.category || ""}
+                        onChange={handleChange}
+                        required
+                      >
+                        <label>Name</label>
+                        <option value="" disabled>Select Category</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Snack">Snack</option>
+                      </select>
+
+                      <label>Name</label>
                       <input
                         type="text"
                         name="name"
@@ -93,6 +116,7 @@ function MealList() {
                         onChange={handleChange}
                         required
                       />
+                      <label>Ingredients</label>
                       <input
                         type="text"
                         name="ingredients"
@@ -100,6 +124,7 @@ function MealList() {
                         onChange={handleChange}
                         required
                       />
+                      <label>Calories</label>
                       <input
                         type="number"
                         name="calories"
@@ -107,23 +132,26 @@ function MealList() {
                         onChange={handleChange}
                         required
                       />
+                      <label>Instructions</label>
                       <textarea
                         name="instructions"
                         value={editMeal.instructions}
                         onChange={handleChange}
                         required
                       />
-                      <button onClick={handleSave}>Save</button> {/* Save button */}
+                      
+                      <button className="listbuttons" onClick={handleSave}>Save</button> {/* Save button */}
                     </div>
                   ) : (
                     <div>
                       {/* Display meal info */}
-                      <strong>{meal.name}</strong>
-                      <p>{meal.ingredients}</p>
+                      <p>Category: {meal.category}</p>
+                      <p>Name: {meal.name}</p>
+                      <p>Ingredients: {meal.ingredients}</p>
                       <p>Calories: {meal.calories}</p>
-                      <p>{meal.instructions}</p>
-                      <button onClick={() => handleEdit(index)}>Edit</button> 
-                      <button onClick={() => handleDelete(index)}>Delete</button> 
+                      <p>Instructions: {meal.instructions}</p>
+                      <button className="listbuttons" onClick={() => handleEdit(index)}>Edit</button> 
+                      <button className="listbuttons" onClick={() => handleDelete(index)}>Delete</button> 
                     </div>
                   )}
                 </li>

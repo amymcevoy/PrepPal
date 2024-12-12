@@ -69,6 +69,19 @@ function AddMeal() {
       <button className="back-btn" onClick={handleBack}>Back</button>
       <form onSubmit={handleSubmit}>
         <div>
+          <label>Category</label>
+          <select
+          name="category"
+          value={meal.category || ""}
+          onChange={handleChange}
+          required
+          >
+            <option value="" disabled>Select Category</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Snack">Snack</option>
+          </select>
           <label>Name</label>
           <input
             placeholder="eg. Pizza"
@@ -82,7 +95,7 @@ function AddMeal() {
         <div>
           <label>Ingredients</label>
           <input
-            placeholer="eg. Cheese ,Dough Sauce"
+            placeholder="eg. Cheese,Dough,Sauce"
             type="text"
             name="ingredients"
             value={meal.ingredients}
@@ -104,7 +117,7 @@ function AddMeal() {
         <div>
           <label>Instructions</label>
           <textarea
-            placeholer="eg. Roll out dough, spread sauce etc"
+            placeholder="eg. Roll out dough,spread sauce..etc"
             name="instructions"
             value={meal.instructions}
             onChange={handleChange}
@@ -115,12 +128,12 @@ function AddMeal() {
 
         <Link to="/meal-list">
           <button>Meal List</button> 
-      </Link>
+        </Link>
 
       </form>
 
       {submitted && (
-        <p style={{ color: 'white', textAlign: 'center', marginTop: '10px' }}>
+        <p style={{ color: 'green', textAlign: 'center', marginTop: '10px' }}>
           Meal added successfully!
         </p>
       

@@ -19,7 +19,8 @@ const mealRequirements = new mongoose.Schema({
     name: String,
     ingredients: String,
     calories: Number,
-    instructions: String
+    instructions: String,
+    category: String
   });
   
 //create a mealmodel
@@ -28,13 +29,13 @@ const Meal = mongoose.model('Meal', mealRequirements);
 // create a meal
 app.post('/api/meals', async (req, res) => {
     try {
-      const { name, ingredients, calories, instructions } = req.body;
+      const { name, ingredients, calories, instructions,category } = req.body;
 
-      if (!name || !ingredients || !calories || !instructions) {
+      if (!name || !ingredients || !calories || !instructions || !category) {
         return res.status(400).json({ message: 'All fields are required.' });
       }
   
-      const newMeal = new Meal({ name, ingredients, calories, instructions });
+      const newMeal = new Meal({ name, ingredients, calories, instructions ,category});
   
       // save the new meal to the database
       await newMeal.save();
