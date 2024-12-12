@@ -24,7 +24,6 @@ function MealList() {
     const handleDelete = (index) => {
         const mealToDelete = meals[index];
         console.log(`Deleting meal with ID: ${mealToDelete._id}`);//check if deletion is working
-    
 
         axios.delete(`http://localhost:4000/api/meals/${mealToDelete._id}`)
           .then(() => {

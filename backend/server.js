@@ -57,14 +57,15 @@ app.get('/api/meals', async (req, res) => {
     }
   });
 
+  //delete meals from database
   app.delete('/api/meals/:id', async (req, res) => {
 
-    console.log('Attempting to delete meal with ID:', req.params.id);
+    console.log('Deleting meal');
 
     try {
         const meal = await Meal.findByIdAndDelete(req.params.id);
         if (!meal) {
-            return res.status(404).send('Mel not found');
+            return res.status(404).send('Meal not found');
         }
         res.status(200).send('Meal deleted');
     } catch (err) {
@@ -72,9 +73,26 @@ app.get('/api/meals', async (req, res) => {
         res.status(500).send('Error deleting');
     }
     
-});
+  });
 
-  
+  //edit meals in database
+  app.put('api/meals/:id', async (req,res) => {
+    
+    console.log('Editing meal');
+
+    try{
+        const meal = await Meal.findByIdAndUpdate(req.params.id);
+        if(!meal){
+            return res.status(404).send('Meal not found');
+        }
+        res.status(200).send('Meal edited');
+    } catch(err){
+        console.error('Error editing meal:',err);
+        res.status(500).send('Error editing');
+    }
+
+ });
+
 
 //start server
 app.listen(port, () => {
