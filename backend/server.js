@@ -76,10 +76,11 @@ app.get('/api/meals', async (req, res) => {
   });
 
   //edit meals in database
-  app.put('api/meals/:id', async (req,res) => {
+  app.put('/api/meals/:id', async (req,res) => {
     
     console.log('Editing meal');
 
+    const updateData = req.body;
     try{
         const meal = await Meal.findByIdAndUpdate(req.params.id);
         if(!meal){
@@ -92,6 +93,7 @@ app.get('/api/meals', async (req, res) => {
     }
 
  });
+
 
 
 //start server

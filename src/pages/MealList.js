@@ -52,17 +52,19 @@ function MealList() {
    
     //save meal after changed
     const handleSave = () => {
-    const updatedMeals = [...meals];
-    updatedMeals[editIndex] = editMeal; //update edited meal in array
+        const originalMeals = [...meals]; 
+        const updatedMeals = [...meals];
+        updatedMeals[editIndex] = editMeal; //update edited meal in array
 
-        //update meal in backend
-        axios.put(`http://localhost:4000/api/meals/${editMeal._id}`, editMeal)
-        .then(() => {
-          setMeals(updatedMeals); //update meals
-          setEditIndex(null); //exit editing
-        })
-        .catch(error => {
-          console.error('Error saving meal:', error);
+            //update meal in backend
+            axios.put(`http://localhost:4000/api/meals/${editMeal._id}`, editMeal)
+                .then(response => {
+                    setMeals(updatedMeals); //update meals
+                    setEditIndex(null); //exit editing
+            })
+            .catch(error => {
+                console.error('Error saving meal:', error);
+                setMeals(originalMeals); // go back to normal if failed
         });
     };
 
