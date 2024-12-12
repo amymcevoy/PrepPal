@@ -122,14 +122,15 @@ function MealList() {
                       <p>{meal.ingredients}</p>
                       <p>Calories: {meal.calories}</p>
                       <p>{meal.instructions}</p>
-                      <button onClick={() => handleEdit(index)}>Edit</button> {/* Edit button */}
-                      <button onClick={() => handleDelete(index)}>Delete</button> {/* Delete button */}
+                      <button onClick={() => handleEdit(index)}>Edit</button> 
+                      <button onClick={() => handleDelete(index)}>Delete</button> 
                     </div>
                   )}
                 </li>
               ))}
             </ul>
           )}
+          
         </div>
       );
     }

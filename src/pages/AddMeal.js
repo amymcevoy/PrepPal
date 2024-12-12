@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';  //for http requests
 
 function AddMeal() {
@@ -51,12 +52,6 @@ function AddMeal() {
           instructions: '',
         });
         setSubmitted(true);
-
-        //after meal added takes you to meal list
-        setTimeout(() => {
-          setSubmitted(false);
-          navigate('/meal-list');
-        }, 3000);
       })
       .catch((error) => {
         console.error('Error adding meal:', error);
@@ -115,10 +110,13 @@ function AddMeal() {
         </div>
         <button type="submit">Submit Meal</button>
       </form>
-
+      
+      <Link to="/meal-list">
+          <button>Meal List</button> 
+      </Link>
 
       {submitted && (
-        <p style={{ color: 'green', textAlign: 'center', marginTop: '10px' }}>
+        <p style={{ color: 'white', textAlign: 'center', marginTop: '10px' }}>
           Meal added successfully!
         </p>
       
