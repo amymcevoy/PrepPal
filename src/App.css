@@ -303,6 +303,17 @@ form button:hover {
   border-radius: 8px;
 }
 
+.calorie-counter {
+  padding: 10px;
+  background-color: #F3F4F6; /* Light grey background */
+  color: #1E3A8A; /* Navy text */
+  border: 1px solid #1E3A8A; /* Navy border */
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 10px; /* Space from the back button */
+}
+
 .secondary-button:hover {
   background-color: #0D9488; /* Teal hover effect for secondary button */
 }
