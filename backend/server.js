@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 const port = 4000;
 
-// connect to MongoDB using your provided connection string
+// connect to MongoDB connection string
 mongoose.connect('mongodb+srv://dbuser123:ZqEpDKNBn7!9@datarep.akdsg.mongodb.net/DataRep?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -27,11 +27,22 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//requirements for meal model
+const mealRequirements = new mongoose.Schema({
+    name: String,
+    ingredients: String,
+    calories: Number,
+    instructions: String
+  });
+  
+  // Create a Meal model from the schema
+  const Meal = mongoose.model('Meal', mealRequirements);
+  
+
 app.get('/', (req, res) => {
     res.send('Hello, world!');
   });
   
-
 //start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
