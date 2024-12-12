@@ -1,25 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import axios from 'axios';
 
 function MealList() {
   const [meals, setMeals] = useState([]);
   const [editIndex, setEditIndex] = useState(null); 
-  const [editMeal, setEditMeal] = useState({})
+  const [editMeal, setEditMeal] = useState({});
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Retrieve saved meals from localStorage
-    const storedMeals = JSON.parse(localStorage.getItem('meals')) || [];
-    setMeals(storedMeals);
+    //fetch meals from backend
+    axios.get('http://localhost:4000/api/meals')
+    .then(response => {
+      setMeals(response.data.meals); //set meals from the backend
+    })
+    .catch(error => {
+      console.error('Error fetching meals:', error);
+    });
 }, []);
     
-const navigate = useNavigate();
-
     //delete a meal
     const handleDelete = (index) => {
-        const updatedMeals = [...meals];
-        updatedMeals.splice(index, 1); //remove meal at specified index
-        setMeals(updatedMeals);
-        localStorage.setItem('meals', JSON.stringify(updatedMeals)); //update localStorage
+        const mealToDelete = meals[index];
+        axios.delete(`http://localhost:4000/api/meals/${mealToDelete._id}`)
+          .then(() => {
+            const updatedMeals = meals.filter((_, i) => i !== index); //remove deleted mea
+            setMeals(updatedMeals); //update
+          })
+          .catch(error => {
+            console.error('Error deleting meal:', error);
+          });
     };
 
     //edit a meal
@@ -40,10 +51,17 @@ const navigate = useNavigate();
     //save meal after changed
     const handleSave = () => {
     const updatedMeals = [...meals];
-    updatedMeals[editIndex] = editMeal; //replace old meal with new one
-    setMeals(updatedMeals);
-    localStorage.setItem('meals', JSON.stringify(updatedMeals));
-    setEditIndex(null); //exit editing
+    updatedMeals[editIndex] = editMeal; //update edited meal in array
+
+        //update meal in backend
+        axios.put(`http://localhost:4000/api/meals/${editMeal._id}`, editMeal)
+        .then(() => {
+          setMeals(updatedMeals); //update meals
+          setEditIndex(null); //exit editing
+        })
+        .catch(error => {
+          console.error('Error saving meal:', error);
+        });
     };
 
     // Back button function

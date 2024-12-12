@@ -1,31 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config();
 const app = express();
 const port = 4000;
-
-// connect to MongoDB connection string
-mongoose.connect('mongodb+srv://dbuser123:ZqEpDKNBn7!9@datarep.akdsg.mongodb.net/DataRep?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('Connected'))
-  .catch((err) => console.error('Error', err));
 
 const cors = require('cors');
 app.use(cors());
 
-//enable for all requests
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(express.json());
 
-//handles from data
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// connect to MongoDB using mongoose and dotenv
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.error('MongoDB connection error:', err));
 
 //requirements for meal model
 const mealRequirements = new mongoose.Schema({
@@ -42,28 +29,35 @@ const Meal = mongoose.model('Meal', mealRequirements);
 app.post('/api/meals', async (req, res) => {
     try {
       const { name, ingredients, calories, instructions } = req.body;
-      const newMeal = new Meal({ name, ingredients, calories, instructions });
-      await newMeal.save();
-      res.status(201).json({ message: 'Meal added successfully', meal: newMeal });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
-  });
+
+      if (!name || !ingredients || !calories || !instructions) {
+        return res.status(400).json({ message: 'All fields are required.' });
+      }
   
-//get all meals
-app.get('/api/meals', async (req, res) => {
-    try {
-      const meals = await Meal.find(); //fetch meals from database
-      res.status(200).json({ meals });
+      const newMeal = new Meal({ name, ingredients, calories, instructions });
+  
+      // save the new meal to the database
+      await newMeal.save();
+  
+      // successs message
+      res.status(201).json({ message: 'Meal added', meal: newMeal });
     } catch (err) {
+      console.error('Error adding meal:', err);
       res.status(500).json({ error: err.message });
     }
   });
 
-app.get('/', (req, res) => {
-    res.send('Hello, world!');
+  //get meals from database
+app.get('/api/meals', async (req, res) => {
+    try {
+      const meals = await Meal.find(); //fetch all meals
+      res.status(200).json({ meals }); // return all meals
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
   });
   
+
 //start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
