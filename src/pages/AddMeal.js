@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';  //for http requests
 
 function AddMeal() {
 
@@ -39,32 +40,32 @@ function AddMeal() {
         return; 
       }
 
-       //saves meal in local storage ( used geeksforgeeks for help with all local storage)
-       const storedMeals = JSON.parse(localStorage.getItem('meals')) || [];
-       storedMeals.push(meal);
-       localStorage.setItem('meals', JSON.stringify(storedMeals));
+    //send data to the backend API using Axios
+    axios.post('http://localhost:4000/api/meals', meal)
+      .then((response) => {
+        console.log(response.data); //logs response
+        setMeal({
+          name: '',
+          ingredients: '',
+          calories: '',
+          instructions: '',
+        });
+        setSubmitted(true);
 
-      // reset form and show success message
-      setMeal({
-        name: '',
-        ingredients: '',
-        calories: '',
-        instructions: '',
-
+        //after meal added takes you to meal list
+        setTimeout(() => {
+          setSubmitted(false);
+          navigate('/meal-list');
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error('Error adding meal:', error);
       });
-
-      setSubmitted(true);
-
-      // reset success message
-      setTimeout(() => {
-        setSubmitted(false);
-      }, 3000);
   };
-
-    // Back button function
-    const handleBack = () => {
-      navigate(-1);  // Navigate back to the previous page
-    };
+  
+  const handleBack = () => {
+    navigate(-1); //brings you back a page
+  };
 
   return (
     <div  className="add-meal-container">
@@ -115,7 +116,7 @@ function AddMeal() {
         <button type="submit">Submit Meal</button>
       </form>
 
-    {/* shows success message after form submission */}
+
       {submitted && (
         <p style={{ color: 'green', textAlign: 'center', marginTop: '10px' }}>
           Meal added successfully!
