@@ -1,6 +1,15 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const port = 4000;
+
+// connect to MongoDB using your provided connection string
+mongoose.connect('mongodb+srv://dbuser123:ZqEpDKNBn7!9@datarep.akdsg.mongodb.net/DataRep?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('Connected'))
+  .catch((err) => console.error('Error', err));
 
 const cors = require('cors');
 app.use(cors());
@@ -17,6 +26,11 @@ app.use(function(req, res, next) {
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+    res.send('Hello, world!');
+  });
+  
 
 //start server
 app.listen(port, () => {
