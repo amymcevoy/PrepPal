@@ -35,9 +35,30 @@ const mealRequirements = new mongoose.Schema({
     instructions: String
   });
   
-  // Create a Meal model from the schema
-  const Meal = mongoose.model('Meal', mealRequirements);
+//create a mealmodel
+const Meal = mongoose.model('Meal', mealRequirements);
+
+// create a meal
+app.post('/api/meals', async (req, res) => {
+    try {
+      const { name, ingredients, calories, instructions } = req.body;
+      const newMeal = new Meal({ name, ingredients, calories, instructions });
+      await newMeal.save();
+      res.status(201).json({ message: 'Meal added successfully', meal: newMeal });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
   
+//get all meals
+app.get('/api/meals', async (req, res) => {
+    try {
+      const meals = await Meal.find(); //fetch meals from database
+      res.status(200).json({ meals });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
 
 app.get('/', (req, res) => {
     res.send('Hello, world!');
