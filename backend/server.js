@@ -56,6 +56,24 @@ app.get('/api/meals', async (req, res) => {
       res.status(500).json({ error: err.message });
     }
   });
+
+  app.delete('/api/meals/:id', async (req, res) => {
+
+    console.log('Attempting to delete meal with ID:', req.params.id);
+
+    try {
+        const meal = await Meal.findByIdAndDelete(req.params.id);
+        if (!meal) {
+            return res.status(404).send('Mel not found');
+        }
+        res.status(200).send('Meal deleted');
+    } catch (err) {
+        console.error('Error deleting meal:', err);
+        res.status(500).send('Error deleting');
+    }
+    
+});
+
   
 
 //start server
